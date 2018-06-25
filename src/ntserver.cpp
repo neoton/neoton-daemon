@@ -410,9 +410,8 @@ void NTServer::onEndpointCommand(QString message)
             log (QString("Endpoint client #%1 passed the auth process, sending parameters").arg(client->endpoint().id));
             client->setAuthorized(true);
             client->sendCommand("AUTH OK");
-            client->sendCommand(QString("MOUNT %1").arg(client->endpoint().mount));
-            client->sendCommand(QString("PORT %1").arg(client->endpoint().port));
-            client->sendCommand("START");
+            client->sendCommand(QString("STREAM %1 %2").arg(client->endpoint().mount).arg(client->endpoint().port));
+            client->sendCommand("PLAY");
         }
 
         return;
