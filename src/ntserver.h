@@ -29,7 +29,7 @@
 #include "ntstationprocess.h"
 #include "ntdatabase.h"
 
-#define NEOTON_VERSION "0.1"
+#define NEOTON_VERSION "0.2"
 
 class NTServer : public QObject
 {
