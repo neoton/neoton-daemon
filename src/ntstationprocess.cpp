@@ -8,8 +8,8 @@
 
 */
 
-NTStationProcess::NTStationProcess(int endpointId, QString appPath, QString liqFilePath, QObject *parent) :
-    endpointId(endpointId), appPath(appPath), liqFilePath(liqFilePath), QObject(parent)
+NTStationProcess::NTStationProcess(int endpointId, QString appPath, QString liqFilePath, QObject *parent) : QObject(parent),
+    endpointId(endpointId), appPath(appPath), liqFilePath(liqFilePath)
 {
     log (QString("Created a new instance of station process handler, process image %1, config file %2").arg(appPath).arg(liqFilePath), LL_INFO);
 
@@ -17,7 +17,7 @@ NTStationProcess::NTStationProcess(int endpointId, QString appPath, QString liqF
     iNeedToRespawn = false;
 
     QStringList args;
-    args << "--config" << liqFilePath;
+    args << liqFilePath;
 
     stationProcess = new QProcess(this);
     stationProcess->setProgram(appPath);
