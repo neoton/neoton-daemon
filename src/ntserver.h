@@ -29,7 +29,7 @@
 #include "ntstationprocess.h"
 #include "ntdatabase.h"
 
-#define NEOTON_VERSION "0.2"
+#define NEOTON_VERSION "0.2.1"
 
 class NTServer : public QObject
 {
@@ -95,7 +95,8 @@ private slots:
     void onEndpointCommand(QString message);
     void onControlCommand(QString message);
 
-    void onEndpointProcessDeath (int endpointId, int exitCode, bool needsToRespawn);
+    void onEndpointProcessStart();
+    void onEndpointProcessDeath(int endpointId, int exitCode, bool needsToRespawn);
 
 public slots:
     void onServerExit();

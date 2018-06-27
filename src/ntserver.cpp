@@ -190,6 +190,13 @@ bool NTServer::stopEspFor(int endpointId, bool forced)
 void NTServer::restartEspFor(int endpointId)
 {
     NTStationProcess *ntsp = getEspFor(endpointId);
+    NTEndpointClient *ep = getEndpointClientFor(endpointId);
+
+    if (ep != NULL)
+    {
+        ep->sendCommand("STOP"); // to make it reconnect to the audio stream later
+    }
+
     ntsp->setNeedsRespawn(true);
     ntsp->stop();
 }
@@ -250,6 +257,18 @@ void NTServer::loadConfig(QString configFile)
 bool NTServer::loadEndpointsFromDatabase()
 {
     dbEndpoints = NTDatabase::db->getEndpoints();
+
+    // This will actualize endpoint settings (mount, port, password, etc)
+    // for existing endpoint connections
+    for (int i = 0; i < dbEndpoints.count(); i++)
+    {
+        NTEndpoint ep = dbEndpoints.at(i);
+        NTEndpointClient *epc = getEndpointClientFor(ep.id);
+
+        if (epc != NULL)
+            epc->setEndpoint(ep);
+    }
+
     return dbEndpoints.count() > 0;
 }
 
@@ -512,6 +531,20 @@ void NTServer::onControlCommand(QString message)
             client->sendCommand("RELOAD ERROR #No endpoints loaded, probably there are no endpoints in the database");
 
         return;
+    }
+}
+
+void NTServer::onEndpointProcessStart()
+{
+    NTStationProcess *ntsp = (NTStationProcess *)QObject::sender();
+    NTEndpointClient *ep = getEndpointClientFor(ntsp->endpoint());
+
+
+    if (ep != NULL)
+    {
+        // actualize settings for the endpoint
+        ep->sendCommand(QString("STREAM %1 %2").arg(ep->endpoint().mount).arg(ep->endpoint().port));
+        ep->sendCommand("PLAY"); // resume playing
     }
 }
 

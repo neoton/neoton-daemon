@@ -49,6 +49,7 @@ private slots:
 
 signals:
     void processDead(int, int, bool);
+    void processStarted();
 
 public slots:
 };
