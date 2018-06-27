@@ -96,7 +96,7 @@ private slots:
     void onControlCommand(QString message);
 
     void onEndpointProcessStart();
-    void onEndpointProcessDeath(int endpointId, int exitCode, bool needsToRespawn);
+    void onEndpointProcessDeath(int exitCode, bool needsToRespawn);
 
 public slots:
     void onServerExit();

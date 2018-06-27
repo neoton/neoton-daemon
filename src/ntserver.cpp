@@ -165,7 +165,8 @@ bool NTServer::createEspFor(int endpointId)
                                                   QString("%1/endpoint_%2.liq").arg(stationAppConfigDir)
                                                   .arg(endpointId));
 
-    connect(ntsp, SIGNAL(processDead(int,int, bool)), this, SLOT(onEndpointProcessDeath(int,int, bool)));
+    connect(ntsp, SIGNAL(processDead(int, bool)), this, SLOT(onEndpointProcessDeath(int, bool)));
+    connect(ntsp, SIGNAL(processStarted()), this, SLOT(onEndpointProcessStart()));
     ntsp->start();
 
     endpointStationProcesses.append(ntsp);
@@ -548,9 +549,12 @@ void NTServer::onEndpointProcessStart()
     }
 }
 
-void NTServer::onEndpointProcessDeath(int endpointId, int exitCode, bool needsToRespawn)
+void NTServer::onEndpointProcessDeath(int exitCode, bool needsToRespawn)
 {
     NTStationProcess *ntsp = (NTStationProcess *)QObject::sender();
+
+    int endpointId = ntsp->endpoint();
+
     log (QString ("Ow, a process of endpoint #%1 has dead with code %2...").arg(endpointId).arg(exitCode), LL_WARNING);
 
     endpointStationProcesses.removeAt(endpointStationProcesses.indexOf(ntsp));

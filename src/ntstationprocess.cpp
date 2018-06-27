@@ -112,5 +112,5 @@ void NTStationProcess::onProcessFinish(int exitCode)
             break;
     }
 
-    emit processDead(endpointId, exitCode, iNeedToRespawn);
+    emit processDead(exitCode, iNeedToRespawn);
 }

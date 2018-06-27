@@ -48,7 +48,7 @@ private slots:
     void onProcessFinish(int exitCode);
 
 signals:
-    void processDead(int, int, bool);
+    void processDead(int, bool);
     void processStarted();
 
 public slots:
