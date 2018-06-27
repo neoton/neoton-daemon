@@ -84,6 +84,8 @@ void NTStationProcess::onProcessStart()
 {
     isRunning = true;
     log (QString("Process spawning succeeded, PID is %1").arg(stationProcess->processId()));
+
+    emit processStarted();
 }
 
 void NTStationProcess::onProcessFinish(int exitCode)
