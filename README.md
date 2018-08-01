@@ -1,4 +1,6 @@
 # What is Neoton?
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fneoton%2Fneoton-daemon.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fneoton%2Fneoton-daemon?ref=badge_shield)
+
 Neoton is a free and open source centralized network-based public broadcasting system. It can be used in malls, schools, universities and other places where public audio playback is needed. Neoton consists of three parts: Daemon, Endpoint and Control Panel. Now you are looking at the Daemon.
 
 # What is Neoton Daemon?
@@ -38,3 +40,7 @@ respawn=false
 ; Restart Liquidsoap only on "bad" exits like crash?
 respawn_on_crash=false
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fneoton%2Fneoton-daemon.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fneoton%2Fneoton-daemon?ref=badge_large)
