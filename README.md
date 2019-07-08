@@ -1,3 +1,7 @@
+## This repo is archived and abandoned 
+Neoton was a graduation project and isn't supported anymore.  
+Portions of this project are reborn in [WaveRadio](https://github.com/WaveRadio) broadcasting platform.
+
 # What is Neoton?
 Neoton is a free and open source centralized network-based public broadcasting system. It can be used in malls, schools, universities and other places where public audio playback is needed. Neoton consists of three parts: Daemon, Endpoint and Control Panel. Now you are looking at the Daemon.
 
